@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Lainie Tunes - Controller</title>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/addons/p5.sound.min.js"></script> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta charset="utf-8" />
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap');
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+        canvas {
+            display: block;
+        }
+
+        body{
+            font-family: 'Jost', sans-serif;
+            text-align: center;
+        }
+
+        button{
+            color: white;
+            display: inline-block;
+            width: 20vw;
+            border: none;
+            border-radius: 3px;
+            padding: 10px;
+        }
+
+        #groupA button{
+            background-color: #851b1e;
+        }
+        #groupA button:active{
+            background-color: #290c0d;
+        }
+
+        #groupB button{
+            background-color: #72318c;
+        }
+        #groupB button:active{
+            background-color: #2b1136;
+        }
+
+        #groupC button{
+            background-color: #4877c2;
+        }
+        #groupC button:active{
+            background-color: #132542;
+        }
+
+        #groupD button{
+            background-color: #4ba343;
+        }
+        #groupD button:active{
+            background-color: #183b15;
+        }
+    </style>
+  </head>
+  <body unselectable="on">
+
+    <div id="groupA">
+        <h1>Group A</h1>
+        <button onclick="playSound('groupA','fart')"> Fart </button>
+        <button onclick="playSound('groupA','bloop')"> Bloop </button>
+        <button onclick="playSound('groupA','chirp')"> Chirp </button>
+    </div>
+
+    <div id="groupB">
+        <h1>Group B</h1>
+        <button onclick="playSound('groupB','fart')"> Fart </button>
+        <button onclick="playSound('groupB','bloop')"> Bloop </button>
+        <button onclick="playSound('groupB','chirp')"> Chirp </button>
+    </div>
+
+    <div id="groupC">
+        <h1>Group C</h1>
+        <button onclick="playSound('groupC','fart')"> Fart </button>
+        <button onclick="playSound('groupC','bloop')"> Bloop </button>
+        <button onclick="playSound('groupC','chirp')"> Chirp </button>
+    </div>
+
+    <div id="groupD">
+        <h1>Group D</h1>
+        <button onclick="playSound('groupD','fart')"> Fart </button>
+        <button onclick="playSound('groupD','bloop')"> Bloop </button>
+        <button onclick="playSound('groupD','chirp')"> Chirp </button>
+    </div>
+
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
