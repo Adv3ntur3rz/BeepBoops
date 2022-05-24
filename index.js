@@ -5,21 +5,24 @@ const cors = require('cors');
 const fs = require("fs");
 
 const app = express();
-const server = http.createServer(app).listen(3030);
+const server = http.createServer(app).listen(8080);
 
 let controller;
+let fileNames = fs.readdirSync('client/sounds/');
 
-const io = new Server(server, {
-    cors:{
-        origin:"https://randielzoquier.com/" //handled :)
-    }
-});
+// console.log(fileNames);
+
+const io = new Server(server);
 
 app.use( "/controller", express.static(__dirname +"/controller/"));
 app.use("/client", express.static(__dirname +"/client/"));
 
 app.get("/", (req,res)=>{
     res.send("Test");
+});
+
+app.get("/filenames/", (req, res)=>{
+    res.send(fileNames);
 });
 
 app.get("/controller", (req,res)=>{
@@ -70,4 +73,4 @@ if(controller){
 }
 
 
-console.log("listening on 3030...");
+console.log("listening on 8080...");

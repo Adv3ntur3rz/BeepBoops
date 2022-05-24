@@ -1,15 +1,25 @@
 let screenNumber = 0;
 let font;
 const socket = io();
-let fart, bloop, chirp;
 let amp;
+let sounds = [];
 
 function preload(){
     font = loadFont("Jost-Medium.ttf");
-    soundFormats("mp3");
-    fart = loadSound("sounds/fart");
-    bloop = loadSound("sounds/bloop");
-    chirp = loadSound("sounds/chirp");
+    let file = [];
+    fetch('/filenames').then( response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error: ${response.status}`);
+        }
+        return response.json();
+    }).then( (json) => {
+        for(let i = 0; i < json.length; i++){
+            soundFormats("mp3");
+            sounds[i] = loadSound("sounds/" + json[i]);
+            console.log(json[i]);
+        }
+    }).catch( err => console.error(`Fetch problem: ${err.message}`) );
+    
 }
 
 function setup() {
@@ -22,19 +32,7 @@ function setup() {
 
 socket.on("playSound", (sound)=>{
     if(screenNumber != 0){
-
-        if (sound == "fart") {
-            fart.play();
-            
-        }
-        if (sound == "bloop") {
-            bloop.play();
-            
-        }
-        if (sound == "chirp") {
-            chirp.play();
-            
-        }
+        sounds[sound].play();
     }
 });
 

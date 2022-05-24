@@ -24,11 +24,12 @@
 
         button{
             color: white;
-            display: inline-block;
+            display: block;
             width: 20vw;
             border: none;
             border-radius: 3px;
             padding: 10px;
+            margin: 1vh auto;
         }
 
         #groupA button{
@@ -58,36 +59,33 @@
         #groupD button:active{
             background-color: #183b15;
         }
+
+        .group{
+            display: inline-block;
+            width: 20vw;
+        }
     </style>
   </head>
   <body unselectable="on">
 
-    <div id="groupA">
+    <div id="groupA" class="group">
         <h1>Group A</h1>
-        <button onclick="playSound('groupA','fart')"> Fart </button>
-        <button onclick="playSound('groupA','bloop')"> Bloop </button>
-        <button onclick="playSound('groupA','chirp')"> Chirp </button>
+        
     </div>
 
-    <div id="groupB">
+    <div id="groupB" class="group">
         <h1>Group B</h1>
-        <button onclick="playSound('groupB','fart')"> Fart </button>
-        <button onclick="playSound('groupB','bloop')"> Bloop </button>
-        <button onclick="playSound('groupB','chirp')"> Chirp </button>
+        
     </div>
 
-    <div id="groupC">
+    <div id="groupC" class="group">
         <h1>Group C</h1>
-        <button onclick="playSound('groupC','fart')"> Fart </button>
-        <button onclick="playSound('groupC','bloop')"> Bloop </button>
-        <button onclick="playSound('groupC','chirp')"> Chirp </button>
+        
     </div>
 
-    <div id="groupD">
+    <div id="groupD" class="group">
         <h1>Group D</h1>
-        <button onclick="playSound('groupD','fart')"> Fart </button>
-        <button onclick="playSound('groupD','bloop')"> Bloop </button>
-        <button onclick="playSound('groupD','chirp')"> Chirp </button>
+        
     </div>
 
     <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>

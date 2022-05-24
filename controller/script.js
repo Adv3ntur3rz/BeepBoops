@@ -1,45 +1,27 @@
+let files = [];
 
-// let screenNumber = 0;
-// let font;
+let groupA = document.getElementById("groupA");
+let groupB = document.getElementById("groupB");
+let groupC = document.getElementById("groupC");
+let groupD = document.getElementById("groupD");
 
-// function preload(){
-//     font = loadFont("Jost-Medium.ttf");
-// }
+fetch('/filenames').then( response => {
+    if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+    }
+    return response.json();
+}).then( (json)=>{
+    for (let i = 0; i < json.length; i++){
+        groupA.innerHTML += `<button onclick="playSound('groupA', ${i})"> ${json[i]} </button>`
+        groupB.innerHTML += `<button onclick="playSound('groupB', ${i})"> ${json[i]} </button>`
+        groupC.innerHTML += `<button onclick="playSound('groupC', ${i})"> ${json[i]} </button>`
+        groupD.innerHTML += `<button onclick="playSound('groupD', ${i})"> ${json[i]} </button>`
+    }
+}).catch( err => console.error(`Fetch problem: ${err.message}`) );
 
-// function setup() {
-//     createCanvas(windowWidth, windowHeight);
-//     textFont(font);
-//     angleMode(DEGREES);
-// }
-  
-// function draw() {
-    
 
-//     if(windowHeight > windowWidth){
-//         background(0);
-        
-//     }else{
-//         background(255);
-//         fill(100);
-//         textSize(height/10);
-//         textAlign(CENTER,CENTER);
-//         rectMode(CENTER);
-//         text("Please rotate your device to portait orientation and lock rotation.", width /2, height /2, width * 0.8, height * 0.8);
-//     }
-// }
 
-// function windowResized(){
-//     resizeCanvas(windowWidth,windowHeight);
-// }
 
-// function touchStarted(){
-
-//     if(touches){
-        
-//     }
-     
-    
-// }
 
 const socket = io();
 socket.emit("controller");
