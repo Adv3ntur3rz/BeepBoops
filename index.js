@@ -12,7 +12,7 @@ let fileNames = fs.readdirSync('client/sounds/');
 
 // console.log(fileNames);
 
-const io = new Server(server);
+const io = new Server(server, {transports: ['websocket']});
 
 app.use( "/controller", express.static(__dirname +"/controller/"));
 app.use("/client", express.static(__dirname +"/client/"));

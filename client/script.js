@@ -1,6 +1,6 @@
 let screenNumber = 0;
 let font;
-const socket = io();
+const socket = io("https://localhost", { transports: ["websocket"] });
 let amp;
 let sounds = [];
 
