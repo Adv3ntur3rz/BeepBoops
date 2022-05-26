@@ -36,6 +36,16 @@ socket.on("playSound", (sound)=>{
     }
 });
 
+socket.on("stop",()=>{
+    if(screenNumber != 0){
+        for( let j = 0; j < sounds.length; j++){
+            if(sounds[j].isPlaying()){
+                sounds[j].stop();
+            }
+        }
+    }
+});
+
 function draw() {
     
 

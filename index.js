@@ -60,9 +60,17 @@ io.on("connection", (socket)=>{
         socket.leave(room);
     });
 
-    socket.on("play", (groupName, fileName)=>{
-        io.to(groupName).emit("playSound", fileName);
-    })
+    socket.on("play", (groupName, fileNo)=>{
+        io.to(groupName).emit("playSound", fileNo);
+    });
+
+    socket.on("stop", (group)=>{
+        if(group == "all"){
+            io.emit("stop");
+        }else{
+            io.to(group).emit("stop");
+        }
+    });
 });
 
 

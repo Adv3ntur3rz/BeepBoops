@@ -64,13 +64,29 @@
             display: inline-block;
             width: 20vw;
         }
+
+        .stop{
+            border: 3px solid red;
+        }
+
+        .stop_all{
+            background-color: rgba(0,0,0,0);
+            background-color: none;
+            color: red;
+            border: 3px solid red;
+            width: 40vw;
+        }
+
+        .stop_all:active{
+            background-color: red;
+            color: white;
+        }
     </style>
   </head>
   <body unselectable="on">
 
     <div id="groupA" class="group">
         <h1>Group A</h1>
-        
     </div>
 
     <div id="groupB" class="group">
@@ -87,7 +103,7 @@
         <h1>Group D</h1>
         
     </div>
-
+    <button class="stop_all" onclick="stop('all')"> STOP - All Groups</button>
     <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
     <script src="script.js"></script>
   </body>
