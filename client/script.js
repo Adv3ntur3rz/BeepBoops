@@ -151,12 +151,20 @@ function mainScreen(screenNo){
 
 
 function mouseClicked(){
+    handleInput(mouseX, mouseY);
+    
+}
 
+function touchStarted(){
+    handleInput(touches[0].x, touches[0].y);
+}
+
+function handleInput(x,y){
     if(screenNumber == 0){
-        let distToA = dist(mouseX, mouseY, width *0.25, height * 0.4);
-        let distToB = dist(mouseX, mouseY, width *0.75, height * 0.4);
-        let distToC = dist(mouseX, mouseY, width *0.25, height * 0.6);
-        let distToD = dist(mouseX, mouseY, width *0.75, height * 0.6);
+        let distToA = dist(x, y, width *0.25, height * 0.4);
+        let distToB = dist(x, y, width *0.75, height * 0.4);
+        let distToC = dist(x, y, width *0.25, height * 0.6);
+        let distToD = dist(x, y, width *0.75, height * 0.6);
 
         if(distToA < width *0.25){
             screenNumber = 1;
@@ -178,7 +186,7 @@ function mouseClicked(){
             socket.emit("groupD");
         }
     }else{
-        let distToBack = dist(mouseX, mouseY, width *0.1, height * 0.05);
+        let distToBack = dist(x, y, width *0.1, height * 0.05);
 
         if(distToBack < width *0.1){
 
