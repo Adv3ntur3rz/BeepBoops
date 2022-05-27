@@ -160,6 +160,7 @@ function touchStarted(){
 }
 
 function handleInput(x,y){
+    console.log(`input handled: x:${x} y" ${y}`);
     if(screenNumber == 0){
         let distToA = dist(x, y, width *0.25, height * 0.4);
         let distToB = dist(x, y, width *0.75, height * 0.4);
