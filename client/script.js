@@ -1,12 +1,13 @@
 let screenNumber = 0;
 let font;
-const socket = io("https://localhost", { transports: ["websocket"] });
+//const socket = io("https://localhost", { transports: ["websocket"] });
+const socket = io();
 let amp;
 let sounds = [];
+let currentSound = 0;
 
 function preload(){
-    font = loadFont("Jost-Medium.ttf");
-    let file = [];
+    font = loadFont("Jost-Medium.ttf"); 
     fetch('/filenames').then( response => {
         if (!response.ok) {
             throw new Error(`HTTP error: ${response.status}`);
@@ -14,35 +15,36 @@ function preload(){
         return response.json();
     }).then( (json) => {
         for(let i = 0; i < json.length; i++){
-            soundFormats("mp3");
-            sounds[i] = loadSound("sounds/" + json[i]);
-            console.log(json[i]);
+            sounds.push(new Howl({src: `sounds/${json[i]}`, preload: true}));
         }
     }).catch( err => console.error(`Fetch problem: ${err.message}`) );
-    
+    socket.emit("client");
 }
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
     textFont(font);
     angleMode(DEGREES);
-    amp = new p5.Amplitude();
+
+    // Create an audio context instance if WebAudio is supported
+    let context = (window.AudioContext || window.webkitAudioContext) ?
+    new (window.AudioContext || window.webkitAudioContext)() : null;
+    if (context){ let unmuteHandle = unmute(context, false, false);}
 }
 
 
 socket.on("playSound", (sound)=>{
     if(screenNumber != 0){
+        currentSound = sound;
         sounds[sound].play();
     }
 });
 
 socket.on("stop",()=>{
     if(screenNumber != 0){
-        for( let j = 0; j < sounds.length; j++){
-            if(sounds[j].isPlaying()){
-                sounds[j].stop();
-            }
-        }
+        for(var j = 0; j < sounds.length; j++){
+            sounds[j].stop();
+        }  
     }
 });
 
@@ -91,7 +93,11 @@ function mainMenu(){
 
 function mainScreen(screenNo){
     noStroke();
-    fill(100,100,255, map(amp.getLevel(), 0, 0.1, 0, 255));
+    if(sounds[currentSound].playing()){
+        fill(100,100,255);
+    }else{
+        fill(255);
+    }
     rectMode(CORNER);
     rect(0,0,width,height);
 
@@ -160,7 +166,7 @@ function touchStarted(){
 }
 
 function handleInput(x,y){
-    console.log(`input handled: x:${x} y" ${y}`);
+    //console.log(`input handled: x:${x} y" ${y}`);
     if(screenNumber == 0){
         let distToA = dist(x, y, width *0.25, height * 0.4);
         let distToB = dist(x, y, width *0.75, height * 0.4);
@@ -206,7 +212,9 @@ function handleInput(x,y){
                 roomToLeave = "groupD";
             }
             screenNumber = 0;
-
+            for(var j = 0; j < sounds.length; j++){
+                sounds[j].stop();
+            }  
 
             socket.emit("resetGroup", roomToLeave);
         }

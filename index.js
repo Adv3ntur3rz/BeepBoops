@@ -12,8 +12,8 @@ let fileNames = fs.readdirSync('client/sounds/');
 
 // console.log(fileNames);
 
-const io = new Server(server, {transports: ['websocket']});
-
+// const io = new Server(server, {transports: ['websocket']});
+const io = new Server(server);
 app.use( "/controller", express.static(__dirname +"/controller/"));
 app.use("/client", express.static(__dirname +"/client/"));
 
@@ -38,6 +38,10 @@ io.on("connection", (socket)=>{
     socket.on("controller", ()=>{
         controller = socket;
         console.log("controller connected");
+    });
+
+    socket.on("client", ()=>{
+        console.log("client connected");
     });
 
     socket.on("groupA", ()=>{
