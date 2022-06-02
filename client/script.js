@@ -1,10 +1,11 @@
 let screenNumber = 0;
 let font;
-//const socket = io("https://localhost", { transports: ["websocket"] });
+let loading = true;
 const socket = io();
 let amp;
 let sounds = [];
 let currentSound = 0;
+
 
 function preload(){
     font = loadFont("Jost-Medium.ttf"); 
@@ -17,6 +18,8 @@ function preload(){
         for(let i = 0; i < json.length; i++){
             sounds.push(new Howl({src: `sounds/${json[i]}`, preload: true}));
         }
+    }).then(()=>{
+        loading = false;
     }).catch( err => console.error(`Fetch problem: ${err.message}`) );
     socket.emit("client");
 }
@@ -40,7 +43,16 @@ socket.on("playSound", (sound)=>{
     }
 });
 
-socket.on("stop",()=>{
+socket.on("loopSound", (sound, loop)=>{
+    
+    sounds[sound].loop(loop);
+});
+
+socket.on("stop",(sound)=>{
+    if(screenNumber != 0){sounds[sound].stop();}
+});
+
+socket.on("stopAll",()=>{
     if(screenNumber != 0){
         for(var j = 0; j < sounds.length; j++){
             sounds[j].stop();
@@ -53,11 +65,20 @@ function draw() {
 
     if(windowHeight > windowWidth){
         background(255);
-        if(screenNumber == 0){
-            mainMenu();
+        if(loading){
+            fill(100);
+            textSize(height/10);
+            textAlign(CENTER,CENTER);
+            rectMode(CENTER);
+            text("Loading Samples...", width /2, height /2, width * 0.8, height * 0.8);
         }else{
-            mainScreen(screenNumber);
+            if(screenNumber == 0){
+                mainMenu();
+            }else{
+                mainScreen(screenNumber);
+            }
         }
+        
     }else{
         background(255);
         fill(100);

@@ -22,59 +22,79 @@
             text-align: center;
         }
 
-        button{
-            color: white;
-            display: block;
-            width: 20vw;
-            border: none;
-            border-radius: 3px;
-            padding: 10px;
-            margin: 1vh auto;
-        }
-
-        #groupA button{
+        #groupA .play{
             background-color: #851b1e;
         }
-        #groupA button:active{
+        #groupA .play:active{
             background-color: #290c0d;
         }
 
-        #groupB button{
+        #groupB .play{
             background-color: #72318c;
         }
-        #groupB button:active{
+        #groupB .play:active{
             background-color: #2b1136;
         }
 
-        #groupC button{
+        #groupC .play{
             background-color: #4877c2;
         }
-        #groupC button:active{
+        #groupC .play:active{
             background-color: #132542;
         }
 
-        #groupD button{
+        #groupD .play{
             background-color: #4ba343;
         }
-        #groupD button:active{
+        #groupD .play:active{
             background-color: #183b15;
         }
 
         .group{
             display: inline-block;
-            width: 20vw;
+            width: 23vw;
+            background-color: #ebfcfa;
+        }
+        .play{
+            width: 90%;
+            border: none;
+            padding: 15px 0px;
+            color: white;
+            border-radius: 10px;
         }
 
         .stop{
-            border: 3px solid red;
+            /* border: 3px solid red; */
+            width: 100%;
+            background-color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 3px;
+            margin-top: 1vh;
         }
 
+        .stop:active{
+            background-color: red;
+        }
+
+        .sampleButtons{
+            display: inline-block;
+            background-color: antiquewhite;
+            margin-bottom: 2vh;
+            border-radius: 10px;
+            padding-bottom: 10px;
+        }
+
+        
+
         .stop_all{
-            background-color: rgba(0,0,0,0);
-            background-color: none;
+            background-color: white;
+            margin: 10px 0px;
             color: red;
+            font-size: 3vh;
             border: 3px solid red;
-            width: 40vw;
+            width: 90vw;
+            border-radius: 10px;
         }
 
         .stop_all:active{

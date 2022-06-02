@@ -36,8 +36,15 @@ app.get("/client", (req, res)=>{
 io.on("connection", (socket)=>{
 
     socket.on("controller", ()=>{
-        controller = socket;
-        console.log("controller connected");
+        if(!controller){
+            controller = socket;
+            console.log("controller connected");
+        }
+        
+        controller.on("disconnect", ()=>{
+            controller = undefined;
+            console.log("controller disconnected");
+        });
     });
 
     socket.on("client", ()=>{
@@ -68,21 +75,17 @@ io.on("connection", (socket)=>{
         io.to(groupName).emit("playSound", fileNo);
     });
 
-    socket.on("stop", (group)=>{
+    socket.on("loop", (groupName, fileNo, loopStatus)=>{
+        io.to(groupName).emit("loopSound", fileNo, loopStatus);
+    });
+
+    socket.on("stop", (group,fileNo)=>{
         if(group == "all"){
-            io.emit("stop");
+            io.emit("stopAll");
         }else{
-            io.to(group).emit("stop");
+            io.to(group).emit("stop",fileNo);
         }
     });
 });
-
-
-if(controller){
-    controller.on("disconnect", ()=>{
-        console.log("controller disconnected");
-    });
-}
-
 
 console.log("listening on 8080...");
