@@ -4,8 +4,7 @@ let loading = true;
 const socket = io();
 let amp;
 let sounds = [];
-let currentSound = 0;
-
+let colors = ["#FF6B6B", "#FFD93D", "#6BCB77", "#4D96FF"]
 
 function preload(){
     font = loadFont("Jost-Medium.ttf"); 
@@ -38,7 +37,6 @@ function setup() {
 
 socket.on("playSound", (sound)=>{
     if(screenNumber != 0){
-        currentSound = sound;
         sounds[sound].play();
     }
 });
@@ -114,13 +112,19 @@ function mainMenu(){
 
 function mainScreen(screenNo){
     noStroke();
-    if(sounds[currentSound].playing()){
-        fill(100,100,255);
-    }else{
-        fill(255);
+
+    for(let sound in sounds){
+        if(sounds[sound].playing()){
+            fill(colors[screenNumber - 1]);
+            
+        }else{
+            fill(0,0);
+        }
+        rectMode(CORNER);
+        rect(0,0,width,height);
     }
-    rectMode(CORNER);
-    rect(0,0,width,height);
+    
+    
 
     if(screenNo == 1){
         noStroke();

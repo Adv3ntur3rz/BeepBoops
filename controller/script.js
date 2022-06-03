@@ -16,22 +16,22 @@ fetch('/filenames').then( response => {
         `<div class="sampleButtons">
         <button class="play" onclick="playSound('groupA', ${i})"> ${json[i]} </button>  
         <label class="loopButton"></label><input  type="checkbox" onclick="loop('groupA', ${i}, this)" /> 🔁 </label> 
-        <button class="stop" onclick="stop('groupA', ${i})">🛑</button>
+        <button class="stop" onclick="stop('groupA', ${i})">Stop</button>
         </div>`;
         groupB.innerHTML += 
         `<div class="sampleButtons">
         <button class="play"  onclick="playSound('groupB', ${i})"> ${json[i]} </button>
-        <label class="loopButton"></label><input  type="checkbox" onclick="loop('groupA', ${i}, this)" /> 🔁 </label> 
-        <button class="stop" onclick="stop('groupB', ${i})">🛑</button>
+        <label class="loopButton"></label><input  type="checkbox" onclick="loop('groupB', ${i}, this)" /> 🔁 </label> 
+        <button class="stop" onclick="stop('groupB', ${i})">Stop</button>
         </div>`;
         groupC.innerHTML += `<div class="sampleButtons"><button class="play"  onclick="playSound('groupC', ${i})"> ${json[i]} </button>
-        <label class="loopButton"></label><input  type="checkbox" onclick="loop('groupA', ${i}, this)" /> 🔁 </label> 
-        <button class="stop" onclick="stop('groupC', ${i})">🛑</button>
+        <label class="loopButton"></label><input  type="checkbox" onclick="loop('groupC', ${i}, this)" /> 🔁 </label> 
+        <button class="stop" onclick="stop('groupC', ${i})">Stop</button>
         </div>`;
         groupD.innerHTML += `<div class="sampleButtons">
         <button class="play"  onclick="playSound('groupD', ${i})"> ${json[i]} </button>
-        <label class="loopButton"></label><input  type="checkbox" onclick="loop('groupA', ${i}, this)" /> 🔁 </label> 
-        <button class="stop" onclick="stop('groupD', ${i})">🛑</button>
+        <label class="loopButton"></label><input  type="checkbox" onclick="loop('groupD', ${i}, this)" /> 🔁 </label> 
+        <button class="stop" onclick="stop('groupD', ${i})">Stop</button>
         </div>`;
     }
 }).catch( err => console.error(`Fetch problem: ${err.message}`) );

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Lainie Tunes - Controller</title>
+    <title>BeepBoops - Controller</title>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script> -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/addons/p5.sound.min.js"></script> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -23,66 +23,73 @@
         }
 
         #groupA .play{
-            background-color: #851b1e;
+            background-color: #FF6B6B;
+            color: white;
         }
         #groupA .play:active{
-            background-color: #290c0d;
+            background-color: #683737;
         }
 
         #groupB .play{
-            background-color: #72318c;
+            color: black;
+            background-color: #FFD93D;
         }
         #groupB .play:active{
-            background-color: #2b1136;
+            background-color: #6e6748;
         }
 
         #groupC .play{
-            background-color: #4877c2;
+            color: white;
+            background-color: #6BCB77;
         }
         #groupC .play:active{
-            background-color: #132542;
+            background-color: #3e6343;
         }
 
         #groupD .play{
-            background-color: #4ba343;
+            color: white;
+            background-color: #4D96FF;
         }
         #groupD .play:active{
-            background-color: #183b15;
+            background-color: #2f3f55;
         }
 
         .group{
             display: inline-block;
             width: 23vw;
-            background-color: #ebfcfa;
+            /* background-color: #d3feff; */
         }
         .play{
             width: 90%;
             border: none;
             padding: 15px 0px;
-            color: white;
             border-radius: 10px;
         }
 
         .stop{
-            /* border: 3px solid red; */
-            width: 100%;
+            border: 3px solid #FF6B6B;
+            color: #FF6B6B;
+            width: 90%;
             background-color: white;
-            border: none;
             border-radius: 10px;
             padding: 3px;
             margin-top: 1vh;
         }
 
         .stop:active{
-            background-color: red;
+            background-color: #FF6B6B;
+            color: white;
+            border: 3px solid #FF6B6B;
         }
 
         .sampleButtons{
             display: inline-block;
-            background-color: antiquewhite;
+            background-color: white;
             margin-bottom: 2vh;
             border-radius: 10px;
             padding-bottom: 10px;
+            padding-top: 10px;
+            box-shadow: 0px 1px 3px gray;
         }
 
         
@@ -90,15 +97,15 @@
         .stop_all{
             background-color: white;
             margin: 10px 0px;
-            color: red;
+            color: #FF6B6B;
             font-size: 3vh;
-            border: 3px solid red;
+            border: 3px solid #FF6B6B;
             width: 90vw;
             border-radius: 10px;
         }
 
         .stop_all:active{
-            background-color: red;
+            background-color: #FF6B6B;
             color: white;
         }
     </style>
