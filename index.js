@@ -18,7 +18,7 @@ app.use( "/controller", express.static(__dirname +"/controller/"));
 app.use("/client", express.static(__dirname +"/client/"));
 
 app.get("/", (req,res)=>{
-    res.sendFile(__dirname +"/client/index.html");
+    res.writeHead(301, { Location: '/client/' });
 });
 
 app.get("/filenames/", (req, res)=>{
