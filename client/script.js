@@ -108,6 +108,12 @@ function mainMenu(){
     text("B", width *0.75, height* 0.422);
     text("C", width *0.25, height* 0.622);
     text("D", width *0.75, height* 0.622);
+
+    fill(50);
+    textSize(height * 0.1);
+    text("BeepBoops", width/ 2, height * 0.2);
+    textSize(height * 0.025);
+    text("By Lainie Fefferman and Randiel Zoquier", width/ 2, height * 0.85);
 }
 
 function mainScreen(screenNo){

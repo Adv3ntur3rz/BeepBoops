@@ -4,7 +4,7 @@ const {Server} = require('socket.io');
 const cors = require('cors');
 const fs = require("fs");
 const multer = require("multer");
-
+const bodyParser = require("body-parser");
 const app = express();
 const server = http.createServer(app).listen(8080);
 
@@ -25,6 +25,8 @@ let upload = multer({storage: stor});
 const io = new Server(server);
 app.use( "/controller", express.static(__dirname +"/controller/"));
 app.use("/", express.static(__dirname +"/client/"));
+app.use("/client", express.static(__dirname +"/client/"));
+app.use("/files", express.static(__dirname + "/files"));
 
 app.get("/", (req,res)=>{
     res.sendFile(__dirname +"/client/index.html");
@@ -43,9 +45,25 @@ app.get("/client", (req, res)=>{
     res.sendFile(__dirname +"/client/index.html");
 });
 
+app.delete("/delete", bodyParser.text(), (req, res)=>{
+    console.log(req.body);
+
+    delFile = __dirname + "/client/sounds/" + req.body;
+
+    fs.stat(delFile, (err, stats)=>{
+        if (err) {
+            return console.error(err);
+        }
+        fs.unlink( delFile, (err)=>{
+            if(err) return console.log(err);
+            console.log(`file ${req.body} deleted successfully`);
+        });
+    });
+    
+});
+
 app.post("/upload", upload.single('upload'),(req,res)=>{
-    res.write('<p> file uploaded successfully, <a href="../controller"> click here</a> to return to the controller </p>');
-    res.end();  
+    return res.redirect('/files'); 
 });
 
 io.on("connection", (socket)=>{
