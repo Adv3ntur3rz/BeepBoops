@@ -110,9 +110,9 @@ function mainMenu(){
     text("D", width *0.75, height* 0.622);
 
     fill(50);
-    textSize(height * 0.1);
+    textSize(height * 0.077);
     text("BeepBoops", width/ 2, height * 0.2);
-    textSize(height * 0.025);
+    textSize(height * 0.02);
     text("By Lainie Fefferman and Randiel Zoquier", width/ 2, height * 0.85);
 }
 
