@@ -1,16 +1,19 @@
-let files = [];
+let files = []; // an empty array to hold all the names of the sound files
 
+//define the empty divs in HTML so it can be populated by buttons later
 let groupA = document.getElementById("groupA");
 let groupB = document.getElementById("groupB");
 let groupC = document.getElementById("groupC");
 let groupD = document.getElementById("groupD");
 
+//grab the filenames from the server and then....
 fetch('/filenames').then( response => {
     if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
     }
     return response.json();
 }).then( (json)=>{
+    //... generate a button for each group usinge that file name info
     for (let i = 0; i < json.length; i++){
         groupA.innerHTML += 
         `<div class="sampleButtons">
@@ -37,10 +40,11 @@ fetch('/filenames').then( response => {
 }).catch( err => console.error(`Fetch problem: ${err.message}`) );
 
 
-
+//connect the the socket instance
 const socket = io();
 socket.emit("controller");
 
+//functions triggered by buttons to send messages to the server for control
 function playSound(group, fileName){
     socket.emit("play", group, fileName);
 }

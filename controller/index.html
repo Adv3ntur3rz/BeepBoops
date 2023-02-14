@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta charset="utf-8" />
     <style>
-
+        /* pretty syles */
         @import url('https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap');
         html, body {
             margin: 0;
@@ -112,7 +112,7 @@
     </style>
   </head>
   <body unselectable="on">
-
+    <!-- empty divs to be filled by javascript when the page loads -->
     <div id="groupA" class="group">
         <h3>A</h3>
     </div>
@@ -131,8 +131,11 @@
         <h3>D</h3>
         
     </div>
+
+    <!-- da stop all button -->
     <button class="stop_all" onclick="stop('all')"> STOP - All Groups</button>
 
+    <!-- load the scripts last so things don't break -->
     <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
     <script src="script.js"></script>
   </body>

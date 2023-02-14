@@ -1,13 +1,17 @@
-let screenNumber = 0;
-let font;
-let loading = true;
-const socket = io();
-let amp;
-let sounds = [];
-let colors = ["#FF6B6B", "#FFD93D", "#6BCB77", "#4D96FF"]
+// A lot of this is some drawing shennanigans, but I'll try my best to walk throught it
 
+let screenNumber = 0; //keep track of screen states
+let font; //hold the font
+let loading = true; 
+const socket = io(); //connect the the socket io instance
+let amp; //amp for sound
+let sounds = []; //hold a list of sounds
+let colors = ["#FF6B6B", "#FFD93D", "#6BCB77", "#4D96FF"]; // pretty colors
+
+// all the drawing and audio loading tasks that need to be preloaded
 function preload(){
     font = loadFont("Jost-Medium.ttf"); 
+    //load all of the audio files into the sound library (Howl)
     fetch('/filenames').then( response => {
         if (!response.ok) {
             throw new Error(`HTTP error: ${response.status}`);
@@ -20,9 +24,12 @@ function preload(){
     }).then(()=>{
         loading = false;
     }).catch( err => console.error(`Fetch problem: ${err.message}`) );
+    
+    //announce itself as a client
     socket.emit("client");
 }
 
+//setup some drawing things
 function setup() {
     createCanvas(windowWidth, windowHeight);
     textFont(font);
@@ -34,18 +41,20 @@ function setup() {
     if (context){ let unmuteHandle = unmute(context, false, false);}
 }
 
-
+//when it receives a playSound message from the server, it plays the sound
 socket.on("playSound", (sound)=>{
     if(screenNumber != 0){
         sounds[sound].play();
     }
 });
 
+//same for loop sound
 socket.on("loopSound", (sound, loop)=>{
     
     sounds[sound].loop(loop);
 });
 
+//... and for stop!
 socket.on("stop",(sound)=>{
     if(screenNumber != 0){sounds[sound].stop();}
 });
@@ -58,11 +67,13 @@ socket.on("stopAll",()=>{
     }
 });
 
+//this is all the fun drawing stuff
 function draw() {
     
-
+    //don't render anything if people are landscape (to keep the experience consistent)
     if(windowHeight > windowWidth){
         background(255);
+        // a courtesy loading screen
         if(loading){
             fill(100);
             textSize(height/10);
@@ -70,6 +81,7 @@ function draw() {
             rectMode(CENTER);
             text("Loading Samples...", width /2, height /2, width * 0.8, height * 0.8);
         }else{
+            //handle the screen rendering
             if(screenNumber == 0){
                 mainMenu();
             }else{
@@ -78,6 +90,7 @@ function draw() {
         }
         
     }else{
+        //tell people to turn their screens
         background(255);
         fill(100);
         textSize(height/10);
@@ -87,11 +100,12 @@ function draw() {
     }
 }
 
+//fix the window when people move their screen around
 function windowResized(){
     resizeCanvas(windowWidth,windowHeight);
 }
 
-
+//All the rendering for the main menu
 function mainMenu(){
     textAlign(CENTER,BASELINE);
     rectMode(CENTER);
@@ -116,6 +130,7 @@ function mainMenu(){
     text("By Lainie Fefferman and Randiel Zoquier", width/ 2, height * 0.85);
 }
 
+//all the rendering for the boop screens
 function mainScreen(screenNo){
     noStroke();
 
@@ -186,18 +201,20 @@ function mainScreen(screenNo){
     
 }
 
-
+//handle input... wait that's what the function is called
 function mouseClicked(){
     handleInput(mouseX, mouseY);
     
 }
-
+//covering bases for touch screen input and normal mouse input
 function touchStarted(){
     handleInput(touches[0].x, touches[0].y);
 }
 
+
 function handleInput(x,y){
     //console.log(`input handled: x:${x} y" ${y}`);
+    //the group selection process
     if(screenNumber == 0){
         let distToA = dist(x, y, width *0.25, height * 0.4);
         let distToB = dist(x, y, width *0.75, height * 0.4);
@@ -224,6 +241,7 @@ function handleInput(x,y){
             socket.emit("groupD");
         }
     }else{
+        //back button
         let distToBack = dist(x, y, width *0.1, height * 0.05);
 
         if(distToBack < width *0.1){

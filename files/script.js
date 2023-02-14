@@ -2,6 +2,7 @@ let list = document.getElementById("fileList");
 
 getFilesNames();
 
+//get the list of file names to display on the main web page
 function getFilesNames(){
 
     list.innerHTML = "";
@@ -17,6 +18,7 @@ function getFilesNames(){
     }).catch( err => console.error(`Fetch problem: ${err.message}`) );
 }
 
+//handle deleiting sounds
 function del(filename){
     fetch('/delete', 
     {
@@ -26,6 +28,7 @@ function del(filename){
     getFilesNames();
 }
 
+//handle uplaoding sounds
 function upload(){
     let data = new FormData(document.getElementById("upload"));
     fetch('/upload', {method: "POST", body: data}); //fix these fetches
