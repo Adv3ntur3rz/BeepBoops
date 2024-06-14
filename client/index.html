@@ -11,6 +11,8 @@
         html, body {
             margin: 0;
             padding: 0;
+            overflow: hidden;
+            overscroll-behavior: none;
         }
         canvas {
             display: block;
@@ -19,9 +21,7 @@
   </head>
   <body unselectable="on">
     <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
-
     <script src="unmute.min.js"></script> <!-- this script fixes a glitch where sound doesn't play because of the iPhone mute slider-->
     <script src="script.js"></script>
-  <body scroll="no" style="overflow: hidden">
   </body>
 </html>

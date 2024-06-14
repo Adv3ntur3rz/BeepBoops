@@ -134,7 +134,7 @@ function mainMenu(){
     textSize(height * 0.077);
     text("BeepBoops", width/ 2, height * 0.2);
     textSize(height * 0.02);
-    text("By Lainie Fefferman and Randiel Zoquier", width/ 2, height * 0.85);
+    text("By Lainie Fefferman, Randiel Zoquier,\nand Kate Tramm", width/ 2, height * 0.85);
 }
 
 //all the rendering for the boop screens
